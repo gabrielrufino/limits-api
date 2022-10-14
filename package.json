@@ -1,0 +1,19 @@
+{
+  "name": "limits-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielrufino/limits-api.git"
+  },
+  "author": "Gabriel Rufino <contato@gabrielrufino.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/gabrielrufino/limits-api/issues"
+  },
+  "homepage": "https://github.com/gabrielrufino/limits-api#readme"
+}
