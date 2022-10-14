@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/gabrielrufino/limits-api#readme",
   "devDependencies": {
+    "@types/express": "^4.17.14",
     "jest": "^29.1.2",
     "nodemon": "^2.0.20",
     "rimraf": "^3.0.2",
