@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/gabrielrufino/limits-api/issues"
   },
-  "homepage": "https://github.com/gabrielrufino/limits-api#readme"
+  "homepage": "https://github.com/gabrielrufino/limits-api#readme",
+  "devDependencies": {
+    "jest": "^29.1.2",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  }
 }
