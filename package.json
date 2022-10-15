@@ -5,6 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
+    "lint": "npx eslint",
+    "lint:fix": "npm run lint -- --fix",
     "start": "dotenv node ./dist/index.js",
     "start:develop": "nodemon --exec dotenv ts-node ./src/index.ts",
     "reinstall": "npx rimraf node_modules && npm ci",
