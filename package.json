@@ -6,6 +6,7 @@
   "scripts": {
     "start": "dotenv node ./dist/index.js",
     "start:develop": "nodemon --exec dotenv ts-node ./src/index.ts",
+    "reinstall": "npx rimraf node_modules && npm ci",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
