@@ -4,6 +4,7 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "build": "tsc",
     "start": "dotenv node ./dist/index.js",
     "start:develop": "nodemon --exec dotenv ts-node ./src/index.ts",
     "reinstall": "npx rimraf node_modules && npm ci",
