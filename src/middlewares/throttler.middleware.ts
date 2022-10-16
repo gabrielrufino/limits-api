@@ -1,4 +1,6 @@
 import express from 'express'
+
+import { TooManyRequestsError } from '../errors/too-many-requests.error'
 import { redis } from '../redis'
 
 export function ThrottlerMiddleware(params: {
@@ -10,15 +12,16 @@ export function ThrottlerMiddleware(params: {
       request
     ) as unknown as string
 
-    const counter = await redis.get(id)
+    const [counter]  = await Promise.all([
+      redis.get(id),
+    ])
+
     if (!counter) {
       await redis.set(id, 1, {
         EX: 60
       })
     } else if (Number(counter) >= 10) {
-      return response.status(429).json({
-        error: 'Too many requests'
-      })
+      return response.status(429).json(new TooManyRequestsError())
     }
 
     await redis.incr(id)

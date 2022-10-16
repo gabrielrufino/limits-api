@@ -1,5 +1,7 @@
 import express from 'express'
 
+import { UnauthorizedError } from '../errors/unauthorized.error'
+
 const {
   AUTH_TOKENS = ''
 } = process.env
@@ -11,9 +13,7 @@ export function AuthenticatorMiddleware(): express.RequestHandler {
     const { authorization } = request.headers
 
     if (!authorization || !tokens.includes(authorization)) {
-      return response.status(401).json({
-        error: 'Unauthorized'
-      })
+      return response.status(401).json(new UnauthorizedError())
     }
 
     next()
