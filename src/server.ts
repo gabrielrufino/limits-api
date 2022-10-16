@@ -2,11 +2,11 @@ import express from 'express'
 import http from 'http'
 import pino from 'pino-http'
 
+import { LOGGER_OPTIONS } from './logger'
+import { AuthenticatorMiddleware } from './middlewares/authenticator.middleware'
 import { PublicController } from './controllers/public.controller'
 import { PrivateController } from './controllers/private.controller'
 import { ThrottlerMiddleware } from './middlewares/throttler.middleware'
-import { LOGGER_OPTIONS } from './logger'
-
 
 const app = express()
 
@@ -19,7 +19,8 @@ app.get(
 )
 app.get(
   '/private',
-  ThrottlerMiddleware({ path: ['headers', 'Authorization'] }),
+  AuthenticatorMiddleware(),
+  ThrottlerMiddleware({ path: ['headers', 'authorization'] }),
   PrivateController.get
 )
 
