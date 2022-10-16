@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/gabrielrufino/limits-api#readme",
   "devDependencies": {
+    "@types/autocannon": "^7.9.0",
     "@types/express": "^4.17.14",
     "@types/jest": "^29.1.2",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
