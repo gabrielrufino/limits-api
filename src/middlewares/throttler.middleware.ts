@@ -37,7 +37,8 @@ export function ThrottlerMiddleware(params: {
       }))
     } else {
       await redis.incrBy(id, weight)
-      next()
     }
+
+    next()
   }
 }
