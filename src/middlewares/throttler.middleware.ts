@@ -22,10 +22,13 @@ export function ThrottlerMiddleware(params: {
       request
     ) as unknown as string
 
-    const [counter, ttl]  = await Promise.all([
-      redis.get(id),
-      redis.ttl(id)
-    ])
+    await redis.watch(id)
+
+    const [counter, ttl] = await redis
+      .multi()
+      .get(id)
+      .ttl(id)
+      .exec()
 
     if (!counter) {
       await redis.set(id, 1, {
@@ -33,7 +36,7 @@ export function ThrottlerMiddleware(params: {
       })
     } else if (Number(counter) >= limitPerHour) {
       return response.status(429).json(new TooManyRequestsError({
-        unlockAt: dayjs().add(ttl, 'seconds').toDate()
+        unlockAt: dayjs().add(ttl as number, 'seconds').toDate()
       }))
     } else {
       await redis.incrBy(id, weight)

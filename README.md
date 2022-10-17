@@ -32,10 +32,12 @@ $ docker-compose up -d redis
 #### Development
 
 ```bash
-$ npm run start:development
+$ npm run start:develop
 ```
 
 #### Production
+
+Change the `NODE_ENV` environment variable to `production` in the `.env` file.
 
 ```bash
 $ npm run build
@@ -86,6 +88,14 @@ You can set the `Authorization` header with any uuid of the `AUTH_TOKENS` enviro
 ```json
 {
   "status": "ok"
+}
+```
+
+**Response 401:**
+
+```json
+{
+  "error": "Unauthorized"
 }
 ```
 
