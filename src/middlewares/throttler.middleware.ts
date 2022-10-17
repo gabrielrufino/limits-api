@@ -24,22 +24,21 @@ export function ThrottlerMiddleware(params: {
 
     await redis.watch(id)
 
-    const [counter, ttl] = await redis
+    const [, counter, ttl,] = await redis
       .multi()
+      .set(id, 0, {
+        NX: true,
+        EX: HOUR_IN_SECONDS
+      })
       .get(id)
       .ttl(id)
+      .incrBy(id, weight)
       .exec()
 
-    if (!counter) {
-      await redis.set(id, 1, {
-        EX: HOUR_IN_SECONDS,
-      })
-    } else if (Number(counter) >= limitPerHour) {
+    if (!counter || Number(counter) >= limitPerHour) {
       return response.status(429).json(new TooManyRequestsError({
         unlockAt: dayjs().add(ttl as number, 'seconds').toDate()
       }))
-    } else {
-      await redis.incrBy(id, weight)
     }
 
     next()
